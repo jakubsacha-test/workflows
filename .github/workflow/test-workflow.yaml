@@ -1,0 +1,9 @@
+on:
+  push:
+
+jobs:
+  call-workflow-1-in-local-repo:
+    uses: jakubsacha/workflows/.github/simple.yml@main
+    with:
+      git-rev: "abc"
+  

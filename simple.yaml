@@ -1,0 +1,14 @@
+on:
+  workflow_call:
+    inputs:
+      git-rev:
+        required: true
+        type: string
+
+jobs:
+  CI Pipeline:
+    runs-on: ubuntu-latest
+    steps:
+    - name: build
+      run: |
+        echo "I'd invoke jest build withg ${{ inputs.config-path }}"
