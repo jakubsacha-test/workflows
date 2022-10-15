@@ -11,4 +11,4 @@ jobs:
     steps:
     - name: build
       run: |
-        echo "I'd invoke jest build withg ${{ inputs.config-path }}"
+        echo "I'd invoke jest build with ${{ inputs.git-rev }}"
