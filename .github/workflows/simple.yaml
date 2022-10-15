@@ -6,7 +6,7 @@ on:
         type: string
 
 jobs:
-  CI Pipeline:
+  Build-Release:
     runs-on: ubuntu-latest
     steps:
     - name: build
