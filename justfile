@@ -5,7 +5,7 @@ unit-tests:
     echo "running unit tests"
 
 push:
-    echo "pushing $1"
+    echo "pushing"
 
 deploy:
     echo "deploying $1"
