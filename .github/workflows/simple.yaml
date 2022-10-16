@@ -34,7 +34,7 @@ jobs:
       run: just integration-tests stage
 
     - name: deploy prod
-      run: just deploy 
+      run: just deploy prod
       
     - name: integration tests prod
       run: just integration-tests prod
