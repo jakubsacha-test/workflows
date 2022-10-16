@@ -1,0 +1,11 @@
+on:
+  push:
+    tags: 
+      - *-prod
+
+jobs:
+  Release:
+    uses: jakubsacha/workflows/.github/workflows/release.yaml@main
+    with:
+      head-ref: ${{ github.head_ref }}
+  

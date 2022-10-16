@@ -1,0 +1,9 @@
+on:
+  push:
+
+jobs:
+  Build:
+    uses: jakubsacha/workflows/.github/workflows/ci.yaml@main
+    with:
+      head-ref: ${{ github.head_ref }}
+  
