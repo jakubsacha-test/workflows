@@ -1,14 +1,14 @@
-build:
+@build:
     echo "building"
 
-unit-tests:
+@unit-tests:
     echo "running unit tests"
 
-push:
+@push:
     echo "pushing"
 
-deploy:
-    echo "deploying $1"
+@deploy target:
+    echo "deploying to $target"
 
-integration-tests:
-    echo "running integration tests for $1"
+@integration-tests target:
+    echo "running integration tests for $target"

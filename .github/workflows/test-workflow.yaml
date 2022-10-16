@@ -2,7 +2,7 @@ on:
   push:
 
 jobs:
-  call-workflow-1-in-local-repo:
+  Build:
     uses: jakubsacha/workflows/.github/workflows/simple.yaml@main
     with:
       head-ref: ${{ github.head_ref }}
