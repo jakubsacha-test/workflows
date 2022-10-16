@@ -1,14 +1,16 @@
-@build:
-    echo "building"
+set positional-arguments
 
-@unit-tests:
-    echo "running unit tests"
+build:
+    @echo "building"
 
-@push:
-    echo "pushing"
+unit-tests:
+    @echo "running unit tests"
 
-@deploy target:
-    echo "deploying to $target"
+push:
+    @echo "pushing"
 
-@integration-tests target:
-    echo "running integration tests for $target"
+deploy target:
+    @echo "deploying to $1"
+
+integration-tests target:
+    @echo "running integration tests for $1"
