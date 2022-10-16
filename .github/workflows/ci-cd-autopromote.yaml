@@ -9,11 +9,11 @@ on:
         type: string
       target-cluster:
         required: true
-        type: choice
-        options:
-        - interface
-        - data
-        - backend 
+        type: string
+        # options:
+        # - interface
+        # - data
+        # - backend 
 
 jobs:
   Build:
