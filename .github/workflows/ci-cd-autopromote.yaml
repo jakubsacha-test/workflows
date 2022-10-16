@@ -17,7 +17,7 @@ on:
 
 defaults:
   run:
-    working-directory: inputs.working-directory
+    working-directory: ${{ inputs.working-directory }}
 
 jobs:
   Build:
