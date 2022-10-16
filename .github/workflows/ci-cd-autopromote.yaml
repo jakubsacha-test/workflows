@@ -7,6 +7,13 @@ on:
       application-name:
         required: true
         type: string
+      target-cluster:
+        required: true
+        type: choice
+        options:
+        - interface
+        - data
+        - backend 
 
 jobs:
   Build:
