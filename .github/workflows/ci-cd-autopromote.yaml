@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: edge
-      url: https://${{ inputs.application-name }}.internal.edge.europe-west4.interface.trv.cloud
+      url: https://${{ inputs.application-name }}.internal.edge.europe-west4.${{ inputs.target-cluster }}.trv.cloud
     steps:
     - uses: actions/checkout@v3
     - uses: extractions/setup-just@v1
@@ -67,7 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: stage
-      url: https://${{ inputs.application-name }}.internal.stage.europe-west4.interface.trv.cloud
+      url: https://${{ inputs.application-name }}.internal.stage.europe-west4.${{ inputs.target-cluster }}.trv.cloud
     steps:
     - uses: actions/checkout@v3
     - uses: extractions/setup-just@v1
@@ -83,7 +83,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: prod
-      url: https://${{ inputs.application-name }}.internal.prod.europe-west4.interface.trv.cloud
+      url: https://${{ inputs.application-name }}.internal.prod.europe-west4.${{ inputs.target-cluster }}.trv.cloud
     steps:
     - uses: actions/checkout@v3
     - uses: extractions/setup-just@v1
