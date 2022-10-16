@@ -4,6 +4,9 @@ on:
       ref:
         required: true
         type: string
+      application-name:
+        required: true
+        type: string
 
 jobs:
   Build:
@@ -21,7 +24,8 @@ jobs:
     - name: push artifact
       run: just push
 
-  Deploy-Edge:
+  Deploy-Preview:
+    if: inputs.head-ref != 'refs/heads/main'
     needs: [Build]
     runs-on: ubuntu-latest
     steps:
@@ -33,9 +37,30 @@ jobs:
     - name: integration tests edge
       run: just integration-tests edge
 
+
+  Deploy-Edge:
+    if: inputs.head-ref == 'refs/heads/main'
+    needs: [Build]
+    runs-on: ubuntu-latest
+    environment:
+      name: edge
+      url: https://${{ inputs.application-name }}.internal.edge.europe-west4.interface.trv.cloud
+    steps:
+    - uses: actions/checkout@v3
+    - uses: extractions/setup-just@v1
+    - name: deploy edge
+      run: just deploy edge
+
+    - name: integration tests edge
+      run: just integration-tests edge
+
   Deploy-Stage:
+    if: inputs.head-ref == 'refs/heads/main'
     needs: [Deploy-Edge]
     runs-on: ubuntu-latest
+    environment:
+      name: stage
+      url: https://${{ inputs.application-name }}.internal.stage.europe-west4.interface.trv.cloud
     steps:
     - uses: actions/checkout@v3
     - uses: extractions/setup-just@v1
@@ -49,6 +74,9 @@ jobs:
     if: inputs.head-ref == 'refs/heads/main'
     needs: [Deploy-Stage]
     runs-on: ubuntu-latest
+    environment:
+      name: prod
+      url: https://${{ inputs.application-name }}.internal.prod.europe-west4.interface.trv.cloud
     steps:
     - uses: actions/checkout@v3
     - uses: extractions/setup-just@v1
