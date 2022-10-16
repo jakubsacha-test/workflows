@@ -25,7 +25,7 @@ jobs:
       run: just push
 
   Deploy-Preview:
-    if: inputs.head-ref != 'refs/heads/main'
+    if: inputs.ref != 'refs/heads/main'
     needs: [Build]
     runs-on: ubuntu-latest
     steps:
@@ -39,7 +39,7 @@ jobs:
 
 
   Deploy-Edge:
-    if: inputs.head-ref == 'refs/heads/main'
+    if: inputs.ref == 'refs/heads/main'
     needs: [Build]
     runs-on: ubuntu-latest
     environment:
@@ -55,7 +55,7 @@ jobs:
       run: just integration-tests edge
 
   Deploy-Stage:
-    if: inputs.head-ref == 'refs/heads/main'
+    if: inputs.ref == 'refs/heads/main'
     needs: [Deploy-Edge]
     runs-on: ubuntu-latest
     environment:
@@ -71,7 +71,7 @@ jobs:
       run: just integration-tests stage
 
   Deploy-Prod:
-    if: inputs.head-ref == 'refs/heads/main'
+    if: inputs.ref == 'refs/heads/main'
     needs: [Deploy-Stage]
     runs-on: ubuntu-latest
     environment:
