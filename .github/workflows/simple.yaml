@@ -6,7 +6,7 @@ on:
         type: string
 
 jobs:
-  Build-Release:
+  Build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -21,18 +21,36 @@ jobs:
     - name: push artifact
       run: just push
 
+  Deploy-Edge:
+    needs: [Build]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: extractions/setup-just@v1
     - name: deploy edge
       run: just deploy edge
 
     - name: integration tests edge
       run: just integration-tests edge
 
+  Deploy-Stage:
+    needs: [Deploy-Edge]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: extractions/setup-just@v1
     - name: deploy stage
       run: just deploy stage
 
     - name: integration tests stage
       run: just integration-tests stage
 
+  Deploy-Prod:
+    needs: [Deploy-Stage]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: extractions/setup-just@v1
     - name: deploy prod
       run: just deploy prod
       
