@@ -15,9 +15,6 @@ on:
         type: string
         default: .
 
-defaults:
-  run:
-    working-directory: ${{ inputs.working-directory }}
 
 jobs:
   Build:
@@ -28,12 +25,15 @@ jobs:
 
     - name: Unit tests
       run: just unit-tests
+      working-directory: ${{ inputs.working-directory }}
 
     - name: build artifact
       run: just build
+      working-directory: ${{ inputs.working-directory }}
 
     - name: push artifact
       run: just push
+      working-directory: ${{ inputs.working-directory }}
 
   Deploy-Preview:
     if: inputs.ref != 'refs/heads/main'
@@ -44,9 +44,11 @@ jobs:
     - uses: extractions/setup-just@v1
     - name: deploy edge
       run: just deploy edge
+      working-directory: ${{ inputs.working-directory }}
 
     - name: integration tests edge
       run: just integration-tests edge
+      working-directory: ${{ inputs.working-directory }}
 
 
   Deploy-Edge:
@@ -61,9 +63,11 @@ jobs:
     - uses: extractions/setup-just@v1
     - name: deploy edge
       run: just deploy edge
+      working-directory: ${{ inputs.working-directory }}
 
     - name: integration tests edge
       run: just integration-tests edge
+      working-directory: ${{ inputs.working-directory }}
 
   Deploy-Stage:
     if: inputs.ref == 'refs/heads/main'
@@ -77,9 +81,11 @@ jobs:
     - uses: extractions/setup-just@v1
     - name: deploy stage
       run: just deploy stage
+      working-directory: ${{ inputs.working-directory }}
 
     - name: integration tests stage
       run: just integration-tests stage
+      working-directory: ${{ inputs.working-directory }}
 
   Deploy-Prod:
     if: inputs.ref == 'refs/heads/main'
@@ -93,6 +99,8 @@ jobs:
     - uses: extractions/setup-just@v1
     - name: deploy prod
       run: just deploy prod
+      working-directory: ${{ inputs.working-directory }}
       
     - name: integration tests prod
       run: just integration-tests prod
+      working-directory: ${{ inputs.working-directory }}
