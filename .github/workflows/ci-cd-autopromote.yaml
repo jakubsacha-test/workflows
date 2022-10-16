@@ -10,10 +10,14 @@ on:
       target-cluster:
         required: true
         type: string
-        # options:
-        # - interface
-        # - data
-        # - backend 
+      working-directory:
+        required: false
+        type: string
+        default: .
+
+defaults:
+  run:
+    working-directory: inputs.working-directory
 
 jobs:
   Build:
