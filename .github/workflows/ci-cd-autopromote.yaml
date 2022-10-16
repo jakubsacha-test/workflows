@@ -56,7 +56,7 @@ jobs:
     needs: [Build]
     runs-on: ubuntu-latest
     environment:
-      name: edge
+      name: "${{ inputs.application-name }} edge"
       url: https://${{ inputs.application-name }}.internal.edge.europe-west4.${{ inputs.target-cluster }}.trv.cloud
     steps:
     - uses: actions/checkout@v3
@@ -74,7 +74,7 @@ jobs:
     needs: [Deploy-Edge]
     runs-on: ubuntu-latest
     environment:
-      name: stage
+      name: "${{ inputs.application-name }} stage"
       url: https://${{ inputs.application-name }}.internal.stage.europe-west4.${{ inputs.target-cluster }}.trv.cloud
     steps:
     - uses: actions/checkout@v3
@@ -92,7 +92,7 @@ jobs:
     needs: [Deploy-Stage]
     runs-on: ubuntu-latest
     environment:
-      name: prod
+      name: "${{ inputs.application-name }} prod"
       url: https://${{ inputs.application-name }}.internal.prod.europe-west4.${{ inputs.target-cluster }}.trv.cloud
     steps:
     - uses: actions/checkout@v3
