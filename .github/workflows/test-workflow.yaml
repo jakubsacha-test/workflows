@@ -5,5 +5,5 @@ jobs:
   call-workflow-1-in-local-repo:
     uses: jakubsacha/workflows/.github/workflows/simple.yaml@main
     with:
-      git-rev: "abc"
+      head-ref: ${{ github.head_ref }}
   

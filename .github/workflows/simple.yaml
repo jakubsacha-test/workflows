@@ -1,7 +1,7 @@
 on:
   workflow_call:
     inputs:
-      git-rev:
+      head-ref:
         required: true
         type: string
 
@@ -9,6 +9,31 @@ jobs:
   Build-Release:
     runs-on: ubuntu-latest
     steps:
-    - name: build
-      run: |
-        echo "I'd invoke jest build with ${{ inputs.git-rev }}"
+    - uses: extractions/setup-just@v1
+
+    - name: Unit tests
+      run: just unit-tests
+
+    - name: build artifact
+      run: just build
+
+    - name: push artifact
+      run: just push
+
+    - name: deploy edge
+      run: just deploy edge
+
+    - name: integration tests edge
+      run: just integration-tests edge
+
+    - name: deploy stage
+      run: just deploy stage
+
+    - name: integration tests stage
+      run: just integration-tests stage
+
+    - name: deploy prod
+      run: just deploy 
+      
+    - name: integration tests prod
+      run: just integration-tests prod
