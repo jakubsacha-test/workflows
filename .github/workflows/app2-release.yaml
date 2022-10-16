@@ -5,7 +5,7 @@ on:
 
 jobs:
   Release:
-    uses: jakubsacha/workflows/.github/workflows/release.yaml@main
+    uses: jakubsacha-test/workflows/.github/workflows/release.yaml@main
     with:
-      head-ref: ${{ github.head_ref }}
+      ref: ${{ github.ref }}
   

@@ -1,7 +1,7 @@
 on:
   workflow_call:
     inputs:
-      head-ref:
+      ref:
         required: true
         type: string
 
@@ -46,6 +46,7 @@ jobs:
       run: just integration-tests stage
 
   Deploy-Prod:
+    if: inputs.head-ref == 'refs/heads/main'
     needs: [Deploy-Stage]
     runs-on: ubuntu-latest
     steps:
